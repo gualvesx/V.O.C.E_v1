@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <title><%= pageTitle %></title>
+    <link rel="stylesheet" href="/css/style.css"> </head>
+<body>
+    <header>
+        <h1><%= pageTitle %></h1>
+    </header>
+    <main>
+        <div class="filters">
+            <p>Filtros em breve...</p>
+        </div>
+
+        <div class="charts">
+            <canvas id="sitesChart"></canvas>
+        </div>
+
+        <div class="actions">
+            <button id="sendToPowerBi">Enviar Relatório ao Power BI</button>
+        </div>
+
+        <div class="data-table">
+            <h2>Últimos Logs Recebidos</h2>
+            <table>
+                <thead>
+                    <tr>
+                        <th>Aluno ID</th>
+                        <th>URL</th>
+                        <th>Duração (s)</th>
+                        <th>Categoria</th>
+                        <th>Timestamp</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <% logs.forEach(log => { %>
+                        <tr>
+                            <td><%= log.aluno_id %></td>
+                            <td><%= log.url %></td>
+                            <td><%= log.duration %></td>
+                            <td><%= log.categoria %></td>
+                            <td><%= new Date(log.timestamp).toLocaleString('pt-BR') %></td>
+                        </tr>
+                    <% }) %>
+                </tbody>
+            </table>
+        </div>
+    </main>
+
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <script src="/js/script.js"></script> </body>
+</html>
