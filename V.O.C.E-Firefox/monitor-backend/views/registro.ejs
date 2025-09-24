@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <title>Registo - V.O.C.E</title>
+    <link rel="stylesheet" href="/css/style.css">
+</head>
+<body class="auth-page">
+    <div class="auth-container">
+        <h2 class="auth-title">Criar Nova Conta</h2>
+        <p class="auth-subtitle">Registe a sua organização e o seu perfil de professor.</p>
+        <form action="/register" method="POST">
+            <div class="form-group">
+                <label for="organizationName">Nome da Sua Organização (Escola):</label>
+                <input type="text" id="organizationName" name="organizationName" placeholder="Ex: Escola Estadual Prof. Guedes" required>
+            </div>
+            <hr class="form-divider">
+            <div class="form-group">
+                <label for="fullName">Seu Nome Completo:</label>
+                <input type="text" id="fullName" name="fullName" required>
+            </div>
+            <div class="form-group">
+                <label for="username">Crie um Nome de Utilizador:</label>
+                <input type="text" id="username" name="username" required>
+            </div>
+            <div class="form-group">
+                <label for="password">Crie uma Senha:</label>
+                <input type="password" id="password" name="password" required>
+            </div>
+
+            <% if (error) { %>
+                <p class="error-message"><%= error %></p>
+            <% } %>
+
+            <button type="submit" class="btn-primary full-width">Registar</button>
+        </form>
+        <div class="auth-footer">
+            <p>Já tem uma conta? <a href="/login">Faça login aqui!</a></p>
+        </div>
+    </div>
+</body>
+</html>
+

@@ -1,0 +1,182 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <title><%= pageTitle %></title>
+    <link rel="stylesheet" href="/css/style.css">
+</head>
+<body>
+    <header class="dashboard-header">
+        <h1><%= pageTitle %></h1>
+        <div class="header-info">
+            <span>Bem-vindo, <strong><%= username %></strong>!</span>
+            <a href="/logout" class="btn-logout">Sair</a>
+        </div>
+    </header>
+    <main>
+        <div class="dashboard-columns">
+            <div class="main-column">
+                
+                <section class="management-container">
+                    <h2>Gestão de Turmas e Alunos</h2>
+                    <div class="class-selector">
+                        <label for="classSelect">Selecione uma Turma:</label>
+                        <select id="classSelect">
+                            <option value="">-- Minhas Turmas --</option>
+                            <% if (classes.length > 0) { %>
+                                <% classes.forEach(cls => { %>
+                                    <option value="<%= cls.id %>"><%= cls.name %></option>
+                                <% }) %>
+                            <% } %>
+                        </select>
+                        <button class="btn-secondary" id="addClassBtn">+ Nova Turma</button>
+                    </div>
+                    <div class="students-management">
+                        <h3>Alunos na Turma Selecionada</h3>
+                        <table class="students-table">
+                            <thead>
+                                <tr>
+                                    <th>Nome do Aluno</th>
+                                    <th>CPF</th>
+                                    <th>ID do PC</th>
+                                    <th>Ações</th>
+                                </tr>
+                            </thead>
+                            <tbody id="studentsTableBody">
+                                <!-- Os alunos serão carregados aqui via JS -->
+                            </tbody>
+                        </table>
+                        <button class="btn-primary" id="addStudentBtn">Adicionar Aluno à Turma</button>
+                    </div>
+                </section>
+
+                <section class="table-container">
+                    <div class="table-header">
+                        <h2>Resumo de Atividade por Aluno</h2>
+                        <div class="filter-group">
+                            <input type="text" id="userSearchInput" placeholder="Procurar aluno por nome ou ID...">
+                        </div>
+                    </div>
+                    <div id="users-table-wrapper">
+                        <table>
+                            <thead>
+                                <tr>
+                                    <th>⚠️</th>
+                                    <th>Nome do Aluno</th>
+                                    <th>ID Bruto</th>
+                                    <th>Tempo Total (min)</th>
+                                    <th>Nº de Registos</th>
+                                    <th>Última Atividade</th>
+                                </tr>
+                            </thead>
+                            <tbody id="usersTableBody">
+                                <tr><td colspan="6">Selecione uma turma para ver o resumo.</td></tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </section>
+
+                <section class="charts-container">
+                    <div class="chart-header">
+                        <h2>Análise Visual (Top 10 Sites)</h2>
+                        <div class="chart-controls">
+                            <button class="chart-btn active" data-type="bar">Barras</button>
+                            <button class="chart-btn" data-type="pie">Pizza</button>
+                            <button class="chart-btn" data-type="doughnut">Rosca</button>
+                        </div>
+                    </div>
+                    <div class="chart-wrapper">
+                        <canvas id="mainChart"></canvas>
+                    </div>
+                </section>
+            </div>
+            <div class="sidebar-column">
+                <section class="table-container">
+                     <div class="table-header">
+                        <h2>⚠️ Tabela de Alertas</h2>
+                        <span class="subtitle">Acessos a Redes Sociais e Jogos</span>
+                    </div>
+                     <div class="alert-filters">
+                        <select id="alertUserFilter">
+                            <option value="">Todos os Alunos</option>
+                             <% users.forEach(user => { %>
+                                <option value="<%= user %>"><%= user %></option>
+                            <% }) %>
+                        </select>
+                        <input type="text" id="alertSiteFilter" placeholder="Filtrar site...">
+                    </div>
+                    <div id="alerts-table-wrapper">
+                        <table>
+                            <thead>
+                                <tr>
+                                    <th>Aluno ID</th>
+                                    <th>URL</th>
+                                    <th>Categoria</th>
+                                    <th>Data e Hora</th>
+                                </tr>
+                            </thead>
+                            <tbody id="alertsTableBody">
+                                <tr><td colspan="4">A carregar...</td></tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </section>
+            </div>
+        </div>
+
+        <section class="table-container">
+             <div class="table-header with-filters">
+                <h2>Logs de Atividade <span id="logs-count"></span></h2>
+                 <div class="filters">
+                    <div class="filter-group">
+                        <label for="userFilter">Aluno:</label>
+                        <select id="userFilter">
+                            <option value="">Todos</option>
+                            <% users.forEach(user => { %>
+                                <option value="<%= user %>"><%= user %></option>
+                            <% }) %>
+                        </select>
+                    </div>
+                    <div class="filter-group">
+                        <label for="categoryFilter">Categoria:</label>
+                        <select id="categoryFilter">
+                            <option value="">Todas</option>
+                            <% categories.forEach(category => { %>
+                                <option value="<%= category %>"><%= category %></option>
+                            <% }) %>
+                        </select>
+                    </div>
+                    <div class="filter-group">
+                        <label for="siteFilter">Site (URL):</label>
+                        <input type="text" id="siteFilter" placeholder="Ex: google.com">
+                    </div>
+                    <div class="filter-buttons">
+                        <button id="applyFiltersBtn">Filtrar</button>
+                        <button id="clearFiltersBtn" class="secondary">Limpar</button>
+                    </div>
+                </div>
+            </div>
+            <div id="logs-table-wrapper">
+                <table>
+                    <thead>
+                        <tr>
+                            <th>Aluno ID</th>
+                            <th>URL</th>
+                            <th>Duração (s)</th>
+                            <th>Categoria</th>
+                            <th>Data e Hora</th>
+                        </tr>
+                    </thead>
+                    <tbody id="logsTableBody">
+                        <tr><td colspan="5">A carregar...</td></tr>
+                    </tbody>
+                </table>
+            </div>
+        </section>
+    </main>
+
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <script src="/js/script.js"></script>
+</body>
+</html>
+

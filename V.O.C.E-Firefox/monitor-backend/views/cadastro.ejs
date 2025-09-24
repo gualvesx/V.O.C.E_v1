@@ -1,0 +1,219 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title><%= pageTitle %></title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="/css/style.css">
+</head>
+<body class="bg-gray-50 min-h-screen flex items-center justify-center py-12 px-4 sm:px-6 lg:px-8">
+    <div class="max-w-md w-full space-y-8">
+        <div class="text-center">
+            <h2 class="mt-6 text-3xl font-extrabold text-gray-900">
+                Criar Nova Conta
+            </h2>
+            <p class="mt-2 text-sm text-gray-600">
+                Registre sua organização e perfil de professor
+            </p>
+        </div>
+
+        <form class="mt-8 space-y-6 bg-white p-8 rounded-xl shadow-lg" action="/cadastro" method="POST" id="cadastroForm">
+            <!-- Seleção de Organização -->
+            <div class="space-y-4">
+                <div>
+                    <label class="block text-sm font-medium text-gray-700 mb-3">
+                        Selecionar Organização:
+                    </label>
+                    
+                    <!-- Opção: Organização Existente -->
+                    <div class="flex items-center mb-3">
+                        <input type="radio" id="existingOrg" name="organizationOption" value="existing" 
+                               class="mr-2" checked onchange="toggleOrganizationOptions()">
+                        <label for="existingOrg" class="text-sm font-medium text-gray-700">
+                            Selecionar organização existente
+                        </label>
+                    </div>
+                    
+                    <div id="existingOrgSection">
+                        <select id="organizationSelect" name="organizationSelect" 
+                                class="mt-1 form-input">
+                            <option value="">-- Selecione uma organização --</option>
+                            <% if (organizations.length > 0) { %>
+                                <% organizations.forEach(org => { %>
+                                    <option value="<%= org.id %>"><%= org.name %></option>
+                                <% }) %>
+                            <% } else { %>
+                                <option value="" disabled>Nenhuma organização cadastrada</option>
+                            <% } %>
+                        </select>
+                    </div>
+
+                    <!-- Opção: Nova Organização -->
+                    <div class="flex items-center mb-3 mt-4">
+                        <input type="radio" id="newOrg" name="organizationOption" value="new" 
+                               class="mr-2" onchange="toggleOrganizationOptions()">
+                        <label for="newOrg" class="text-sm font-medium text-gray-700">
+                            Criar nova organização
+                        </label>
+                    </div>
+                    
+                    <div id="newOrgSection" class="hidden">
+                        <input type="text" id="organizationName" name="organizationName" 
+                               class="mt-1 form-input"
+                               placeholder="Digite o nome da nova organização">
+                        <p class="text-xs text-gray-500 mt-1">
+                            A nova organização será criada e associada ao seu perfil.
+                        </p>
+                    </div>
+
+                    <!-- Opção: Solicitar Adição -->
+                    <div class="mt-4 pt-4 border-t border-gray-200">
+                        <div class="flex items-center mb-2">
+                            <input type="radio" id="requestOrg" name="organizationOption" value="request" 
+                                   class="mr-2" onchange="toggleOrganizationOptions()">
+                            <label for="requestOrg" class="text-sm font-medium text-gray-700">
+                                Solicitar adição de organização
+                            </label>
+                        </div>
+                        
+                        <div id="requestOrgSection" class="hidden space-y-3 bg-blue-50 p-4 rounded-lg">
+                            <p class="text-sm text-blue-700">
+                                Sua organização não está listada? Solicite a adição e entraremos em contato.
+                            </p>
+                            <input type="text" id="requestedOrgName" 
+                                   class="w-full px-3 py-2 border border-blue-300 rounded text-sm"
+                                   placeholder="Nome da organização">
+                            <input type="email" id="requesterEmail" 
+                                   class="w-full px-3 py-2 border border-blue-300 rounded text-sm"
+                                   placeholder="Seu email para contato">
+                            <button type="button" onclick="requestOrganization()" 
+                                    class="w-full bg-blue-600 text-white py-2 px-4 rounded text-sm hover:bg-blue-700">
+                                Solicitar Adição
+                            </button>
+                        </div>
+                    </div>
+                </div>
+
+                <hr class="my-6">
+
+                <!-- Dados Pessoais -->
+                <div>
+                    <label for="fullName" class="block text-sm font-medium text-gray-700">
+                        Seu Nome Completo
+                    </label>
+                    <input id="fullName" name="fullName" type="text" required 
+                           class="mt-1 form-input">
+                </div>
+
+                <div>
+                    <label for="username" class="block text-sm font-medium text-gray-700">
+                        Nome de Utilizador
+                    </label>
+                    <input id="username" name="username" type="text" required 
+                           class="mt-1 form-input">
+                </div>
+
+                <div>
+                    <label for="password" class="block text-sm font-medium text-gray-700">
+                        Senha
+                    </label>
+                    <input id="password" name="password" type="password" required 
+                           class="mt-1 form-input" minlength="6">
+                    <p class="text-xs text-gray-500 mt-1">Mínimo 6 caracteres</p>
+                </div>
+            </div>
+
+            <% if (typeof error !== 'undefined' && error) { %>
+                <div class="bg-red-50 border border-red-200 rounded-lg p-4">
+                    <p class="text-sm text-red-600"><%= error %></p>
+                </div>
+            <% } %>
+
+            <div>
+                <button type="submit" 
+                        class="group relative w-full flex justify-center py-3 px-4 border border-transparent text-sm font-medium rounded-md text-white bg-blue-600 hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-blue-500 transition-colors duration-200">
+                    Registrar Conta
+                </button>
+            </div>
+
+            <div class="text-center">
+                <p class="text-sm text-gray-600">
+                    Já tem uma conta? 
+                    <a href="/login" class="font-medium text-blue-600 hover:text-blue-500 transition-colors duration-200">
+                        Faça login aqui!
+                    </a>
+                </p>
+            </div>
+        </form>
+    </div>
+
+    <script>
+        function toggleOrganizationOptions() {
+            const existingOrgSection = document.getElementById('existingOrgSection');
+            const newOrgSection = document.getElementById('newOrgSection');
+            const requestOrgSection = document.getElementById('requestOrgSection');
+            const existingOrgRadio = document.getElementById('existingOrg');
+            const newOrgRadio = document.getElementById('newOrg');
+            const requestOrgRadio = document.getElementById('requestOrg');
+
+            // Reset all sections
+            existingOrgSection.classList.remove('hidden');
+            newOrgSection.classList.add('hidden');
+            requestOrgSection.classList.add('hidden');
+
+            // Show selected section
+            if (newOrgRadio.checked) {
+                existingOrgSection.classList.add('hidden');
+                newOrgSection.classList.remove('hidden');
+            } else if (requestOrgRadio.checked) {
+                existingOrgSection.classList.add('hidden');
+                requestOrgSection.classList.remove('hidden');
+            }
+        }
+
+        function requestOrganization() {
+            const orgName = document.getElementById('requestedOrgName').value;
+            const email = document.getElementById('requesterEmail').value;
+
+            if (!orgName || !email) {
+                alert('Por favor, preencha todos os campos da solicitação.');
+                return;
+            }
+
+            fetch('/api/organizations/request', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json',
+                },
+                body: JSON.stringify({
+                    organizationName: orgName,
+                    requesterName: document.getElementById('fullName').value,
+                    requesterEmail: email
+                })
+            })
+            .then(response => response.json())
+            .then(data => {
+                if (data.success) {
+                    alert(data.message);
+                    // Reset form
+                    document.getElementById('requestedOrgName').value = '';
+                    document.getElementById('requesterEmail').value = '';
+                    // Switch back to existing org selection
+                    document.getElementById('existingOrg').checked = true;
+                    toggleOrganizationOptions();
+                } else {
+                    alert('Erro: ' + data.message);
+                }
+            })
+            .catch(error => {
+                console.error('Erro:', error);
+                alert('Erro ao enviar solicitação. Tente novamente.');
+            });
+        }
+
+        // Initialize on page load
+        document.addEventListener('DOMContentLoaded', toggleOrganizationOptions);
+    </script>
+</body>
+</html>
