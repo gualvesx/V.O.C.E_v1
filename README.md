@@ -7,3 +7,4 @@
 - DB_USER=root
 - DB_PASSWORD=
 - DB_DATABASE=voce
+# pip install tensorflow scikit-learn pandas
