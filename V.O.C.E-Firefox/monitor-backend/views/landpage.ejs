@@ -4,80 +4,69 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title><%= pageTitle %></title>
+    <!-- Script CDN do TailwindCSS - Essencial para o funcionamento dos estilos -->
     <script src="https://cdn.tailwindcss.com"></script>
-    <link rel="stylesheet" href="/css/style.css">
+    <style>
+        /* Estilos globais mínimos que não são do Tailwind */
+        body {
+            font-family: 'Segoe UI', system-ui, sans-serif;
+        }
+    </style>
 </head>
-<body class="bg-gradient-to-br from-blue-900 to-purple-900 min-h-screen">
-    <!-- Navigation -->
-    <nav class="bg-white/10 backdrop-blur-md border-b border-white/20">
+<body class="bg-white flex flex-col min-h-screen">
+
+    <!-- CABEÇALHO -->
+    <header class="bg-white shadow-md border-b-2 border-gray-100">
         <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-            <div class="flex justify-between items-center h-16">
-                <div class="flex items-center">
-                    <span class="text-2xl font-bold text-white">V.O.C.E</span>
-                </div>
+            <div class="flex justify-between items-center h-20">
+                <!-- Logo -->
+                <a href="/">
+                    <img src="https://upload.wikimedia.org/wikipedia/commons/8/8c/SENAI_S%C3%A3o_Paulo_logo.png" alt="Logo SENAI" class="h-10 w-auto">
+                </a>
+                <!-- Navegação -->
                 <div class="flex items-center space-x-4">
-                    <a href="/login" class="text-white hover:text-blue-200 transition-colors duration-200">
+                    <a href="/login" class="text-gray-600 hover:text-red-700 font-semibold transition-colors duration-200 text-sm uppercase tracking-wider">
                         Entrar
                     </a>
-                    <a href="/cadastro" class="bg-blue-600 hover:bg-blue-700 text-white px-6 py-2 rounded-lg font-medium transition-colors duration-200">
-                        Cadastrar Escola
+                    <a href="/cadastro" class="inline-block px-6 py-2.5 rounded-md font-semibold text-center uppercase tracking-wider text-sm transition-transform duration-200 transform hover:scale-105 focus:outline-none focus:ring-2 focus:ring-offset-2 bg-red-700 text-white hover:bg-red-800 focus:ring-red-500">
+                        Cadastrar
                     </a>
                 </div>
             </div>
         </div>
-    </nav>
+    </header>
 
-    <!-- Hero Section -->
-    <main class="flex items-center justify-center min-h-[calc(100vh-4rem)]">
-        <div class="text-center text-white px-4">
-            <h1 class="text-5xl md:text-6xl font-bold mb-6 leading-tight">
-                Monitorização Inteligente para 
-                <span class="bg-gradient-to-r from-blue-400 to-purple-400 bg-clip-text text-transparent">
-                    Ambientes Educacionais
-                </span>
-            </h1>
-            <p class="text-xl md:text-2xl mb-8 text-blue-100 max-w-3xl mx-auto leading-relaxed">
-                Gerencie laboratórios de informática e salas de aula com ferramentas avançadas de monitorização e análise comportamental.
-            </p>
-            <div class="flex flex-col sm:flex-row gap-4 justify-center items-center">
-                <a href="/login" class="bg-blue-600 hover:bg-blue-700 text-white px-8 py-4 rounded-lg font-semibold text-lg transition-all duration-200 transform hover:scale-105">
-                    Acessar Painel
-                </a>
-                <!-- Na landpage.ejs, atualize o link de cadastro -->
-                <a href="/cadastro" class="border-2 border-white text-white hover:bg-white hover:text-blue-900 px-8 py-4 rounded-lg font-semibold text-lg transition-all duration-200">
-                    Começar Agora
-                </a>
+    <!-- CONTEÚDO PRINCIPAL -->
+    <main class="flex-grow">
+        <div class="bg-gray-50">
+            <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-24 sm:py-32">
+                <div class="text-center">
+                    <h1 class="text-4xl md:text-5xl font-extrabold text-gray-900 leading-tight tracking-tight">
+                        Monitorização Inteligente para
+                        <span class="block text-red-700 mt-2">
+                            Ambientes Educacionais
+                        </span>
+                    </h1>
+                    <p class="mt-6 text-lg md:text-xl text-gray-600 max-w-3xl mx-auto">
+                        Gerencie laboratórios de informática e salas de aula com ferramentas avançadas de monitorização e análise comportamental.
+                    </p>
+                    <div class="mt-10 flex flex-col sm:flex-row gap-4 justify-center items-center">
+                        <a href="/login" class="inline-block w-full sm:w-auto px-8 py-3 text-base rounded-md font-semibold text-center uppercase tracking-wider transition-transform duration-200 transform hover:scale-105 focus:outline-none focus:ring-2 focus:ring-offset-2 bg-red-700 text-white hover:bg-red-800 focus:ring-red-500">
+                            Acessar Painel
+                        </a>
+                    </div>
+                </div>
             </div>
         </div>
     </main>
 
-    <!-- Features Section -->
-    <section class="py-20 bg-white/5">
-        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-            <div class="grid md:grid-cols-3 gap-8">
-                <div class="text-center p-6">
-                    <div class="w-16 h-16 bg-blue-600 rounded-full flex items-center justify-center mx-auto mb-4">
-                        <span class="text-2xl">🔍</span>
-                    </div>
-                    <h3 class="text-xl font-bold text-white mb-2">Monitorização em Tempo Real</h3>
-                    <p class="text-blue-100">Acompanhe a atividade dos alunos com precisão e detalhes</p>
-                </div>
-                <div class="text-center p-6">
-                    <div class="w-16 h-16 bg-green-600 rounded-full flex items-center justify-center mx-auto mb-4">
-                        <span class="text-2xl">🤖</span>
-                    </div>
-                    <h3 class="text-xl font-bold text-white mb-2">IA Avançada</h3>
-                    <p class="text-blue-100">Classificação inteligente de conteúdo usando machine learning</p>
-                </div>
-                <div class="text-center p-6">
-                    <div class="w-16 h-16 bg-purple-600 rounded-full flex items-center justify-center mx-auto mb-4">
-                        <span class="text-2xl">📊</span>
-                    </div>
-                    <h3 class="text-xl font-bold text-white mb-2">Relatórios Detalhados</h3>
-                    <p class="text-blue-100">Dashboard interativo com gráficos e métricas importantes</p>
-                </div>
-            </div>
+    <!-- RODAPÉ -->
+    <footer class="bg-red-800 text-white mt-auto">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-6 text-center">
+            <p class="text-sm">&copy; <%= new Date().getFullYear() %> SENAI - V.O.C.E. Todos os direitos reservados.</p>
         </div>
-    </section>
+    </footer>
+
 </body>
 </html>
+

@@ -58,7 +58,7 @@ unity.com,Jogos
 unrealengine.com,Jogos
 kongregate.com,Jogos
 newgrounds.com,Jogos
- Miniclip.com,Jogos
+miniclip.com,Jogos
 addictinggames.com,Jogos
 crazygames.com,Jogos
 8ballpool.com,Jogos
@@ -111,7 +111,6 @@ cdprojektred.com,Jogos
 fromsoftware.jp,Jogos
 activision.com,Jogos
 take2games.com,Jogos
-zynga.com,Jogos
 supercell.com,Jogos
 nianticlabs.com,Jogos
 mojang.com,Jogos
@@ -283,8 +282,6 @@ lastpass.com,Produtividade
 1password.com,Produtividade
 bitwarden.com,Produtividade
 wetransfer.com,Produtividade
-grammarly.com,Produtividade
-miro.com,Produtividade
 mural.co,Produtividade
 basecamp.com,Produtividade
 clickup.com,Produtividade
@@ -377,7 +374,6 @@ gov.br,Outros
 receita.fazenda.gov.br,Outros
 sp.gov.br,Outros
 detran.sp.gov.br,Outros
-wikipedia.com,Educacional
 climatempo.com.br,Outros
 accuweather.com,Outros
 ipgg.sao-paulo.pt,Outros
@@ -412,8 +408,6 @@ sbt.com.br,Outros
 recordtv.r7.com,Outros
 band.uol.com.br,Outros
 cultura.uol.com.br,Outros
-stackoverflow.com,Produtividade
-github.com,Produtividade
 gitlab.com,Produtividade
 bitbucket.org,Produtividade
 docker.com,Produtividade
@@ -472,7 +466,6 @@ magento.com,Produtividade
 webflow.com,Produtividade
 joomla.org,Produtividade
 drupal.org,Produtividade
-medium.com,Produtividade
 blogger.com,Produtividade
 ghost.org,Produtividade
 substack.com,Produtividade
@@ -482,14 +475,9 @@ indiegogo.com,Outros
 gofundme.com,Outros
 eventbrite.com,Outros
 sympla.com.br,Outros
-meetup.com,Produtividade
-surveymonkey.com,Produtividade
-typeform.com,Produtividade
-mailchimp.com,Produtividade
 sendgrid.com,Produtividade
 twilio.com,Produtividade
 stripe.com,Produtividade
-paypal.com,Produtividade
 adwords.google.com,Produtividade
 analytics.google.com,Produtividade
 ads.facebook.com,Produtividade
@@ -502,8 +490,6 @@ ahrefs.com,Produtividade
 moz.com,Produtividade
 similarweb.com,Produtividade
 alexa.com,Produtividade
-canva.com,Produtividade
-figma.com,Produtividade
 invisionapp.com,Produtividade
 sketch.com,Produtividade
 zeplin.io,Produtividade
@@ -542,3 +528,17 @@ toptal.com,Produtividade
 guru.com,Produtividade
 freelancer.com,Produtividade
 hired.com,Produtividade
+openai.com,IA
+gemini.google.com,IA
+huggingface.co,IA
+anthropic.com,IA
+midjourney.com,IA
+perplexity.ai,IA
+claude.ai,IA
+poe.com,IA
+bard.google.com,IA
+tensorflow.org,IA
+pytorch.org,IA
+keras.io,IA
+deepmind.google,IA
+
